@@ -1,12 +1,14 @@
-
+import { Route,Routes } from "react-router-dom"
+import HomePage from "./pages/Home.jsx"
+import AboutUs from "./pages/AboutUs.jsx"
 function App() {
 
   return (
     <>
-      <div className="bg-[url('./assets/bg.jpg')]">
-      <h1 className="text-sm">Code Rocket</h1>
-
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage></HomePage>}></Route>
+        <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
+      </Routes>
     </>
   )
 }
