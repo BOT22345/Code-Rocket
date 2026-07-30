@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #080b14;
+  --bg-elevated: #0e1424;
+  --fg: #eef1f8;
+  --fg-muted: #8791ab;
+  --border: rgba(255, 255, 255, 0.08);
+  --panel: rgba(255, 255, 255, 0.05);
+  --nav-blur-bg: rgba(8, 11, 20, 0.7);
+  --font-display: "Segoe UI", ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif;
+  --font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Default theme: Cosmic */
+  --gradient-from: #d946ef;
+  --gradient-via: #a855f7;
+  --gradient-to: #8b5cf6;
+  --accent: #d946ef;
+  --accent-2: #8b5cf6;
+  
+  /* Smooth transitions for color changes */
+  transition: --gradient-from 0.5s ease, --gradient-via 0.5s ease, --gradient-to 0.5s ease, --accent 0.5s ease, --accent-2 0.5s ease;
+}
+
+[data-gradient="cosmic"] {
+  --gradient-from: #d946ef;
+  --gradient-via: #a855f7;
+  --gradient-to: #8b5cf6;
+  --accent: #d946ef;
+  --accent-2: #8b5cf6;
+}
+
+[data-gradient="ocean"] {
+  --gradient-from: #06b6d4;
+  --gradient-via: #0891b2;
+  --gradient-to: #0e7490;
+  --accent: #06b6d4;
+  --accent-2: #0e7490;
+}
+
+[data-gradient="sunset"] {
+  --gradient-from: #ec4899;
+  --gradient-via: #f97316;
+  --gradient-to: #fb923c;
+  --accent: #ec4899;
+  --accent-2: #fb923c;
+}
+
+[data-gradient="forest"] {
+  --gradient-from: #84cc16;
+  --gradient-via: #22c55e;
+  --gradient-to: #10b981;
+  --accent: #84cc16;
+  --accent-2: #10b981;
+}
+
+[data-gradient="neon"] {
+  --gradient-from: #22d3ee;
+  --gradient-via: #06b6d4;
+  --gradient-to: #0891b2;
+  --accent: #22d3ee;
+  --accent-2: #0891b2;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-panel: var(--panel);
+  --color-gradient-from: var(--gradient-from);
+  --color-gradient-via: var(--gradient-via);
+  --color-gradient-to: var(--gradient-to);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(1deg); }
+}
+
+@keyframes float-chip {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes drift {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -10px); }
+  100% { transform: translate(0, 0); }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-chip {
+  animation: float-chip 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-chip {
+    animation: none;
+  }
+}
