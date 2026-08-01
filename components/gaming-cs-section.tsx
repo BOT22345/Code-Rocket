@@ -95,48 +95,36 @@ export function GamingCSSection() {
 
     let animationFrameId: number;
     let scrollPosition = 0;
-    const scrollSpeed = 0.5; // pixels per frame
+    const scrollSpeed = 0.5;
 
     const scroll = () => {
       if (!isPaused && scrollContainer) {
         scrollPosition += scrollSpeed;
-        
-        // Reset scroll position when we've scrolled past the first set of cards
+
         const maxScroll = scrollContainer.scrollWidth / 2;
+
         if (scrollPosition >= maxScroll) {
           scrollPosition = 0;
         }
-        
+
         scrollContainer.scrollLeft = scrollPosition;
       }
+
       animationFrameId = requestAnimationFrame(scroll);
     };
 
     animationFrameId = requestAnimationFrame(scroll);
 
     return () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
+      cancelAnimationFrame(animationFrameId);
     };
   }, [isPaused]);
 
-  // Duplicate cards for seamless loop
   const duplicatedCards = [...GAME_CARDS, ...GAME_CARDS];
 
   return (
     <section className="relative py-20 px-6 lg:px-10 overflow-hidden">
-      {/* Background blur effect */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-30"
-        style={{
-          background:
-            "radial-gradient(50% 40% at 50% 50%, color-mix(in srgb, var(--accent) 8%, transparent), transparent)",
-        }}
-      />
-
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-fg mb-6">
             <span className="bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
@@ -145,6 +133,7 @@ export function GamingCSSection() {
             <br />
             <span className="text-fg">Computer Science</span>
           </h2>
+
           <p className="text-lg text-fg-muted max-w-3xl mx-auto leading-relaxed">
             Why learn from textbooks when you can learn by playing? Popular games become interactive
             classrooms where every quest, race, and build teaches real coding, logic, and problem-solving
@@ -152,50 +141,80 @@ export function GamingCSSection() {
           </p>
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative">
-          {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-bg via-bg/80 to-transparent" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-bg via-bg/80 to-transparent" />
-
-          {/* Scrolling Cards */}
+        {/* Carousel Container with Theme Border */}
+        <div className="relative rounded-2xl p-1 bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)]">
+          
+          {/* Floating Meteorites */}
           <div
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-hidden"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            className="absolute -top-3 -left-3 w-6 h-6 rounded-full bg-gradient-to-br from-[var(--gradient-from)] to-[var(--gradient-to)] opacity-80 animate-float-chip"
+            style={{ animationDelay: "0s" }}
+          />
+
+          <div
+            className="absolute -top-2 left-20 w-4 h-4 rounded-full bg-gradient-to-br from-[var(--gradient-via)] to-[var(--gradient-to)] opacity-70 animate-float-chip"
+            style={{ animationDelay: "0.5s" }}
+          />
+
+          <div
+            className="absolute top-10 -left-4 w-5 h-5 rounded-full bg-gradient-to-br from-[var(--gradient-from)] to-[var(--gradient-via)] opacity-75 animate-float-chip"
+            style={{ animationDelay: "1s" }}
+          />
+
+          <div
+            className="absolute -top-2 -right-3 w-5 h-5 rounded-full bg-gradient-to-br from-[var(--gradient-to)] to-[var(--gradient-from)] opacity-80 animate-float-chip"
+            style={{ animationDelay: "0.3s" }}
+          />
+
+          <div
+            className="rounded-xl bg-bg p-6"
           >
-            {duplicatedCards.map((card, index) => (
-              <div
-                key={`${card.title}-${index}`}
-                className="group relative flex-shrink-0 w-[280px]"
-              >
-                {/* Gradient border wrapper */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] opacity-60 blur-sm transition-opacity duration-300 group-hover:opacity-100" />
-                
-                {/* Card content */}
-                <div className="relative h-full rounded-2xl border border-border bg-bg-elevated/95 backdrop-blur overflow-hidden transition-transform duration-300 group-hover:scale-[1.02] group-hover:border-[var(--accent)]">
-                  {/* Image container */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-bg to-bg-elevated">
-                    <GameCardPlaceholder gradient={card.gradient} icon={card.icon} />
-                  </div>
+            {/* Scrolling Cards */}
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-6 overflow-x-hidden"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              {duplicatedCards.map((card, index) => (
+                <div
+                  key={`${card.title}-${index}`}
+                  className="group relative flex-shrink-0 w-[280px]"
+                >
+                  {/* Theme changing border */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
 
-                  {/* Card footer */}
-                  <div className="p-5">
-                    <h3 className="font-display text-xl font-bold text-fg mb-1.5">
-                      {card.title}
-                    </h3>
-                    <p className="text-sm text-fg-muted">
-                      {card.description}
-                    </p>
-                  </div>
+                  {/* Card */}
+                  <div className="relative m-[1px] h-full rounded-2xl border border-border bg-bg-elevated overflow-hidden transition-all duration-300 group-hover:scale-[1.02] group-hover:border-[var(--accent)]">
+                    
+                    {/* Image */}
+                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-bg to-bg-elevated">
+                      <GameCardPlaceholder
+                        gradient={card.gradient}
+                        icon={card.icon}
+                      />
+                    </div>
 
-                  {/* Hover effect overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent)]/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    {/* Content */}
+                    <div className="p-5">
+                      <h3 className="font-display text-xl font-bold text-fg mb-1.5">
+                        {card.title}
+                      </h3>
+
+                      <p className="text-sm text-fg-muted">
+                        {card.description}
+                      </p>
+                    </div>
+
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent)]/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
