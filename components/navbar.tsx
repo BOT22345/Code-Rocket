@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Rocket, Menu, X } from "lucide-react";
 import { GradientPicker } from "@/components/gradient-picker";
+import { ThemeToggleButton } from "@/components/theme-toggle-button";
 
 const NAV_LINKS = [
   { label: "Home", href: "#" },
@@ -39,7 +40,8 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggleButton />
           <GradientPicker />
         </div>
 
@@ -68,7 +70,11 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="mt-5">
+          <div className="mt-5 flex flex-col gap-3">
+            <div className="flex items-center justify-between p-3 rounded-lg bg-bg-elevated border border-border">
+              <span className="text-sm font-medium text-fg">Theme</span>
+              <ThemeToggleButton />
+            </div>
             <GradientPicker />
           </div>
         </div>
