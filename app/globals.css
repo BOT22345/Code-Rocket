@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  /* Dark mode colors (default) */
   --bg: #080b14;
   --bg-elevated: #0e1424;
   --fg: #eef1f8;
@@ -17,9 +18,28 @@
   --gradient-to: #8b5cf6;
   --accent: #d946ef;
   --accent-2: #8b5cf6;
-  
-  /* Smooth transitions for color changes */
-  transition: --gradient-from 0.5s ease, --gradient-via 0.5s ease, --gradient-to 0.5s ease, --accent 0.5s ease, --accent-2 0.5s ease;
+}
+
+/* Light mode colors */
+.light {
+  --bg: #ffffff;
+  --bg-elevated: #f9fafb;
+  --fg: #111827;
+  --fg-muted: #6b7280;
+  --border: rgba(0, 0, 0, 0.1);
+  --panel: rgba(0, 0, 0, 0.03);
+  --nav-blur-bg: rgba(255, 255, 255, 0.8);
+}
+
+/* Dark mode colors (explicit) */
+.dark {
+  --bg: #080b14;
+  --bg-elevated: #0e1424;
+  --fg: #eef1f8;
+  --fg-muted: #8791ab;
+  --border: rgba(255, 255, 255, 0.08);
+  --panel: rgba(255, 255, 255, 0.05);
+  --nav-blur-bg: rgba(8, 11, 20, 0.7);
 }
 
 [data-gradient="cosmic"] {
@@ -79,12 +99,22 @@
 }
 
 html {
+  color-scheme: light dark;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark {
   color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @keyframes float-slow {
