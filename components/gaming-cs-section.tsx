@@ -217,13 +217,6 @@ export function GamingCSSection() {
             </div>
           </div>
         </div>
-
-        {/* Pause Hint */}
-        <div className="text-center mt-8">
-          <p className="text-sm text-fg-muted">
-            Hover over cards to pause • {GAME_CARDS.length} games and counting
-          </p>
-        </div>
       </div>
     </section>
   );
